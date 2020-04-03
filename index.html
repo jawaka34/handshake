@@ -20,21 +20,47 @@
 
     <script>
 
-        var c = document.getElementById("main_canvas")
+
+var c = document.getElementById("main_canvas")
         var ctx = c.getContext("2d")
         points_print(ctx)
 
-        c.addEventListener('mousedown', function(e) {
-            
-            var mouse = get_mouse_coord(c,e)
+        c.addEventListener('mouseup', function (e){
+            var mouse = get_mouse_coord(c, e)
+            if ( move_point != -1){
+                points[move_point] = [mouse.x, mouse.y]
+                move_point = -1   
+                points_print(ctx)
+            }
+        })
+
+        c.addEventListener('mousemove', function (e){
+            var mouse = get_mouse_coord(c, e)
+            if ( move_point != -1){
+                points[move_point] = [mouse.x, mouse.y]
+                
+                points_print(ctx)
+            }
+        })
+
+        c.addEventListener('mousedown', function (e) {
+
+            var mouse = get_mouse_coord(c, e)
             var mx = mouse.x
             var my = mouse.y
-            add_point(mx,my)
-            points_print(ctx)
-        })
-    </script>
+            if (point_clicked(mouse) != -1) {
+                move_point = point_clicked(mouse)
+            }
+            else {
+                add_point(mx, my)
+                points_print(ctx)
+            }
 
-    <button type="button" onclick="points_reset(ctx)" >Reset</button>
+        })
+
+    </script>
+    
+    <button type="button" onclick="points_reset(ctx)">Reset</button>
 
 </body>
 

@@ -1,3 +1,8 @@
+// global pour le move
+
+move_point = -1
+
+
 function get_mouse_coord(canvas, e) {
     var offsetX = 0, offsetY = 0, mx, my
 
@@ -14,3 +19,21 @@ function get_mouse_coord(canvas, e) {
 
     return { x: mx, y: my }
 }
+
+
+
+function point_clicked(coord){
+    for ( x in points){
+        if ( (coord.x - points[x][0])* (coord.x - points[x][0]) + (coord.y- points[x][1]) * (coord.y - points[x][1]) <= point_radius*point_radius ){
+            return x
+        }
+       
+    }
+    return -1
+}
+
+
+
+
+
+
