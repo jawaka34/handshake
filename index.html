@@ -19,10 +19,22 @@
     </canvas>
 
     <script>
-        points_print()
+
+        var c = document.getElementById("main_canvas")
+        var ctx = c.getContext("2d")
+        points_print(ctx)
+
+        c.addEventListener('mousedown', function(e) {
+            
+            var mouse = get_mouse_coord(c,e)
+            var mx = mouse.x
+            var my = mouse.y
+            add_point(mx,my)
+            points_print(ctx)
+        })
     </script>
 
-    <button type="button" onclick="points_reset()">Reset</button>
+    <button type="button" onclick="points_reset(ctx)" >Reset</button>
 
 </body>
 
